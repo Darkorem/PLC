@@ -1,0 +1,351 @@
+using System;
+/* front.c - a lexical analyzer system for simple
+ arithmetic expressions */
+
+public class Front
+{
+	public Front()
+	{
+		TokenDictionary.Add( 10,"INT_LIT");//  = 10;
+		TokenDictionary.Add( 11,"IDENT");//   = 11;
+		TokenDictionary.Add( 20,"ASSIGN_OP");//   = 20;
+		TokenDictionary.Add( 21,"ADD_OP");//   = 21;
+		TokenDictionary.Add( 22,"SUB_OP");//   = 22;
+		TokenDictionary.Add( 23,"MULT_OP");//   = 23;
+		TokenDictionary.Add( 24,"DIV_OP");//   = 24;
+		TokenDictionary.Add( 25,"LEFT_PAREN");//   = 25;
+		TokenDictionary.Add( 26,"RIGHT_PAREN");//   = 26;
+		TokenDictionary.Add( 27,"MODULO");
+		//TokenDictionary.Add( 28,"assign");//  = 28;
+		TokenDictionary.Add( 29,"equals");//  = 29;
+		TokenDictionary.Add( 30,"less_than");//  = 30;
+		TokenDictionary.Add( 31,"greater_than");//  = 31;
+		TokenDictionary.Add( 32,"less_than_or_equal");//  = 32;
+		TokenDictionary.Add( 33,"greater_than_or_equal");//  = 33;
+		TokenDictionary.Add( 34,"and");//  = 34;
+		TokenDictionary.Add( 35,"or");//  = 35;
+		TokenDictionary.Add( 36,"variable_identifier");//  = 36;
+		TokenDictionary.Add( 37,"integer_literal");//  = 37;
+		TokenDictionary.Add( 38,"float_literal");//  = 38;
+		TokenDictionary.Add( 0 ,"EOF");//   = 0;
+	}
+
+/* Global declarations */
+/* Variables */
+int charClass;
+char[] lexeme = new char[100];
+char nextChar;
+int lexLen;
+int token;
+int nextToken;
+System.IO.TextReader in_fp;
+
+/* Function declarations 
+int lookup(char ch);
+void addChar(void);
+void getChar(void);
+void getNonBlank(void);
+int lex(void);
+*/
+Dictionary<int,string> TokenDictionary = new();
+/* Character classes */
+const int LETTER  = 2;
+const int  DIGIT = 1;
+const int LOGIC  = 3;
+//const int  FLOAT = 4;
+const int  VARIABLE = 5;
+const int PERIOD = 6;
+const int  UNKNOWN  = 99;
+
+/* Token codes */
+const int INT_LIT  = 10;
+const int IDENT = 11;
+const int ASSIGN_OP = 20;
+const int ADD_OP = 21;
+const int SUB_OP = 22;
+const int MULT_OP = 23;
+const int DIV_OP = 24;
+const int LEFT_PAREN = 25;
+const int RIGHT_PAREN = 26;
+const int MODULO = 27;
+
+//const int assign = 28;
+const int equals = 29;
+const int less_than = 30;
+const int greater_than = 31;
+const int less_than_or_equal = 32;
+const int greater_than_or_equal = 33;
+const int and = 34;
+const int or = 35;
+const int variable_identifier = 36;
+const int integer_literal = 37;
+const int float_literal = 38;
+//const int PERIOD = 39;
+const int EOF = 0;
+
+/******************************************************/
+/* main driver */
+public int execute() 
+{
+	/* Open the input data file and process its contents */
+
+	var file_path = "front.in";
+
+	if(!System.IO.File.Exists(file_path))
+	{
+		System.Console.WriteLine("ERROR - cannot open front.in \n");
+		return 0;
+	}
+	
+	 //if ((in_fp = new System.IO.StreamReader(("front.in")) == NULL)
+	 //	System.Console.WriteLine("ERROR - cannot open front.in \n");
+	 
+	in_fp = new System.IO.StreamReader(file_path);
+	getChar();
+	 do 
+	 {
+	 	lex();
+	 } 
+	 while (nextToken != EOF);
+
+	
+	 return 0;
+}
+/******************************************************/
+/* lookup - a function to look up operators and
+ parentheses and return the token */
+int lookup(char ch) {
+	 switch (ch) 
+	 {
+		 case '(':
+			 addChar();
+			 nextToken = LEFT_PAREN;
+			 break;
+		 case ')':
+			 addChar();
+			 nextToken = RIGHT_PAREN;
+			 break;
+		 case '+':
+			 addChar();
+			 nextToken = ADD_OP;
+			 break;
+		 case '-':
+			 addChar();
+			 nextToken = SUB_OP;
+			 break;
+		 case '*':
+			 addChar();
+			 nextToken = MULT_OP;
+			 break;
+		 case '/':
+			 addChar();
+			 nextToken = DIV_OP;
+			 break;
+		case '%':
+			 addChar();
+			 nextToken = MODULO;
+			 break;
+		 default:
+			 addChar();
+			 nextToken = EOF;
+			 break;
+	 }
+	 return nextToken;
+}
+
+/******************************************************/
+/* addChar - a function to add nextChar to lexeme */
+void addChar() 
+{
+	if (lexLen <= 98) 
+	{
+		lexeme[lexLen++] = nextChar;
+		lexeme[lexLen] = '\0';
+	} else
+	System.Console.WriteLine("Error - lexeme is too long \n");
+}
+
+
+/******************************************************/
+/* getChar - a function to get the next character of
+ input and determine its character class */
+void getChar() 
+{
+	nextChar = (char) in_fp.Read();
+	 if (nextChar != EOF) 
+	 {
+		 if (Char.IsLetter(nextChar))//(isalpha(nextChar))
+		 	charClass = LETTER;
+		 else if (Char.IsDigit(nextChar))
+		 	charClass = DIGIT;
+		else if (nextChar.ToString() == ".")
+		 	charClass = PERIOD;
+		else if (	nextChar.ToString() == "<" || 
+					nextChar.ToString() == ">" || 
+					nextChar.ToString() == "=" || 
+					nextChar.ToString() == "|" || 
+					nextChar.ToString() == "&" )
+		 	charClass = LOGIC;
+		 else
+		 	charClass = UNKNOWN;
+	 } 
+	 else
+	 	charClass = EOF;
+}
+
+
+/******************************************************/
+/* getNonBlank - a function to call getChar until it
+ returns a non-whitespace character */
+void getNonBlank() 
+{
+	while (Char.IsWhiteSpace(nextChar))
+	getChar();
+}
+
+/******************************************************/
+/* lex - a simple lexical analyzer for arithmetic
+ expressions */
+int lex() 
+{
+	 lexLen = 0;
+	 getNonBlank();
+	 switch (charClass) 
+	 {
+		/* Identifiers */
+		 case LETTER:
+			 addChar();
+			 getChar();
+			 while (charClass == LETTER || charClass == DIGIT) 
+			 {
+				 addChar();
+				 getChar();
+			 }
+			 nextToken = IDENT;
+			 break;
+		/* Integer literals */
+		 case DIGIT:
+			 addChar();
+			 getChar();
+			 while (charClass == DIGIT || charClass == PERIOD) 
+			 { 
+				if(charClass == PERIOD)
+				{
+					addChar();
+					getChar();
+					while (charClass == DIGIT) 
+					{
+						addChar();
+						getChar();
+					}
+					nextToken = float_literal;
+					break;
+				}
+				else
+				{
+					addChar();
+					getChar();
+					while (charClass == DIGIT) 
+					{
+						addChar();
+						getChar();
+					}
+					nextToken = INT_LIT;
+					break;
+				}
+			 }
+			 //nextToken = INT_LIT;
+		 	break;
+		/* Logical Operations 
+			<
+			<=
+			>
+			>=
+			==
+			&&
+			||
+		*/
+		 case LOGIC:
+			 addChar();
+			 getChar();
+			 while (charClass == LOGIC) 
+			 { 
+				addChar();
+			 	getChar();
+				/*
+				if(nextChar.ToString() == "<")
+				{
+					addChar();
+					getChar();
+					if (nextChar.ToString() ==  "=") 
+					{
+						addChar();
+						getChar();
+						nextToken = less_than_or_equal;
+						break;
+					}
+					else
+					{
+						addChar();
+						getChar();
+						nextToken = less_than;
+						break;
+					}
+				}*/
+			
+				
+			 }
+			 nextToken = LOGIC;
+		 	break;
+		/* Variable identifier */
+		 case VARIABLE:
+			 addChar();
+			 getChar();
+			 while (charClass == VARIABLE) {
+				 addChar();
+				 getChar();
+			 }
+			 nextToken = variable_identifier;
+			 lexeme[0] = 'v';
+			 lexeme[1] = 'a';
+			 lexeme[2] = 'r';
+			 lexeme[3] = '\0';
+		 	break;	
+		/* Parentheses and operators */
+		 case UNKNOWN:
+			 lookup(nextChar);
+			 getChar();
+			 break;
+			/* EOF */
+		case EOF:
+			 nextToken = EOF;
+			 lexeme[0] = 'E';
+			 lexeme[1] = 'O';
+			 lexeme[2] = 'F';
+			 lexeme[3] = '\0';
+		 	break;
+	 } /* End of switch */
+	 System.Console.WriteLine($"Next token is: {TokenDictionary[nextToken]} {nextToken}, Next lexeme is {Convert(lexeme)}\n");
+
+	 return nextToken;
+} 
+
+	string Convert(char[] value)
+	{
+		var result = new System.Text.StringBuilder();
+
+		foreach(var c in value)
+		{
+			if(c != '\0')
+			{
+				result.Append(c);
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		return result.ToString();
+	}
+}
