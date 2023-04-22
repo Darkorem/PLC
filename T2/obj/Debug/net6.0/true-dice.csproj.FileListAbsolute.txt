@@ -1,0 +1,15 @@
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/bin/Debug/net6.0/true-dice
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/bin/Debug/net6.0/true-dice.deps.json
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/bin/Debug/net6.0/true-dice.runtimeconfig.json
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/bin/Debug/net6.0/true-dice.dll
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/bin/Debug/net6.0/ref/true-dice.dll
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/bin/Debug/net6.0/true-dice.pdb
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/obj/Debug/net6.0/true-dice.csproj.AssemblyReference.cache
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/obj/Debug/net6.0/true-dice.GeneratedMSBuildEditorConfig.editorconfig
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/obj/Debug/net6.0/true-dice.AssemblyInfoInputs.cache
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/obj/Debug/net6.0/true-dice.AssemblyInfo.cs
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/obj/Debug/net6.0/true-dice.csproj.CoreCompileInputs.cache
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/obj/Debug/net6.0/true-dice.dll
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/obj/Debug/net6.0/ref/true-dice.dll
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/obj/Debug/net6.0/true-dice.pdb
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/true-dice/obj/Debug/net6.0/true-dice.genruntimeconfig.cache

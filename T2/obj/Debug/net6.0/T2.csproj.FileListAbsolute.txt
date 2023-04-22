@@ -1,0 +1,15 @@
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/bin/Debug/net6.0/T2
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/bin/Debug/net6.0/T2.deps.json
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/bin/Debug/net6.0/T2.runtimeconfig.json
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/bin/Debug/net6.0/T2.dll
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/bin/Debug/net6.0/ref/T2.dll
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/bin/Debug/net6.0/T2.pdb
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/obj/Debug/net6.0/T2.csproj.AssemblyReference.cache
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/obj/Debug/net6.0/T2.GeneratedMSBuildEditorConfig.editorconfig
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/obj/Debug/net6.0/T2.AssemblyInfoInputs.cache
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/obj/Debug/net6.0/T2.AssemblyInfo.cs
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/obj/Debug/net6.0/T2.csproj.CoreCompileInputs.cache
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/obj/Debug/net6.0/T2.dll
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/obj/Debug/net6.0/ref/T2.dll
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/obj/Debug/net6.0/T2.pdb
+/home/darkorem/workspace/PLCProject/design-pattern-site/src/plc/T2/obj/Debug/net6.0/T2.genruntimeconfig.cache

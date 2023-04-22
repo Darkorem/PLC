@@ -1,0 +1,28 @@
+<less_than> := <
+<greater_than> := >
+<equal_symbol> := =
+<comparison_operator> := <less_than> | <greater_than> | <less_than><equal_symbol> | <greater_than><equal_symbol>
+<equals_operator> := <equals> | <equals><equals>
+<and_operator> := <ampers_and> | <ampers_and><ampers_and>
+<or_operator> := <pipe> | <pipe><pipe>
+
+<number>:= <INT_LIT> | <float>
+<INT_LIT>:=<DIGIT>{<DIGIT>}
+<float> := <period> <INT_LIT>{<INT_LIT>} | <INT_LIT> <period> {<INT_LIT>}
+
+<variable_identifier>:= <LETTER>{<LETTER>|<DIGIT>}
+
+<STMT> --> <IF_STMT> | <BLOCK> | <ASSIGN> | <DECLARE> | <WHILE_LOOP>
+<STMT_LIST> --> { <STMT> `;` }
+<WHILE_LOOP> --> `while` `(` <BOOL_EXPR> `)` <BLOCK> 
+<IF_STMT> --> `if` `(` <BOOL_EXPR> `)` <BLOCK>  [ `else`  <BLOCK> ] 
+<BLOCK> --> `{` <STMT_LIST> `}`
+<DECLARE> --> `DataType` ID {`,` ID }
+<ASSIGN> --> ID `=` <EXPR>
+<EXPR> --> <TERM> {(`+`|`-`) <TERM>}
+<TERM> --> <FACT> {(`*`|`/`|`%`) <FACT>}
+<FACT> --> <variable_identifier> | INT_LIT | FLOAT_LIT | `(` <EXPR> `)`
+<BOOL_EXPR> --> <BTERM> {(`>`|`<`|`>=`|`<=`) <BTERM>}
+<BTERM> --> <BAND> {(`==`|`!=`) <BAND>}
+<BAND> --> <BOR> {`&&` <BOR>}
+<BOR> --> <EXPR> {`&&` <EXPR>}
